@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      font-family: "Lato", sans-serif;
+    }
+
+    .sidebar {
+      background-color: #f1f1f1;
+      position: fixed;
+      height: 100%;
+      overflow: auto;
+      left: 4.5%;
+      top: 15.6%;
+      z-index: 999;
+    }
+
+    .sidebar a {
+      display: block;
+      color: black;
+      padding: 16px;
+      text-decoration: none;
+    }
+
+    .sidebar a.active {
+      /* background-color: #04AA6D; */
+      color: #2f58ec;
+    }
+
+    .sidebar a:hover:not(.active) {
+      background-color: #555;
+      color: white;
+    }
+
+    div.content {
+      margin-left: 200px;
+      padding: 1px 16px;
+      height: 1000px;
+    }
+
+    @media screen and (max-width: 700px) {
+      .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+      }
+
+      .sidebar a {
+        float: left;
+      }
+
+      div.content {
+        margin-left: 0;
+      }
+    }
+
+    @media screen and (max-width: 400px) {
+      .sidebar a {
+        text-align: center;
+        float: none;
+      }
+    }
+
+    .hide-all {
+      display: none;
+    }
+
+    .navg {
+      margin-top: 30px;
+      margin-left: 6px;
+      float: left;
+      left: 4px;
+      position: fixed;
+    }
+
+    .download {
+      /* margin-top: 1000px; */
+      background-color: yellow;
+      width: 120px;
+      border: 2px solid black;
+      border-radius: 9px;
+      margin-left: 10px;
+      text-align: center;
+      float: left;
+
+    }
+
+
+    /* lms details screen styles*/
+    .maint {
+      width: 100%;
+      margin: 0;
+      padding: 30;
+      text-align: center;
+    }
+
+    .subt1, .subt2, .subt4 {
+      width: 100%;
+      background-color: LightBlue;
+      padding: 10px;
+      border-radius: 3px;
+      border: 2px black dotted;
+      line-height: 30px;
+
+    }
+
+
+    .myless {
+      margin-top: 10px;
+    }
+
+    .subless {
+      margin-top: 50px;
+    }
+
+    .leader {
+      margin-left: 180px;
+      line-height: 30px;
+      background-color: LightGray;
+      padding: 30px;
+      border-radius: 5px;
+      margin-top: 50px;
+      width: 50%;
+
+    }
+
+    img {
+      cursor: pointer;
+    }
+    .badge{
+      margin-top: -50px;
+      margin-left: 1200px;
+    }
+    /*my courses*/
+    .heading{
+    font-style: sans-serif;
+    text-align: center;
+  }
+  .python{
+    background-color: Lightblue;
+    padding: 50px;
+    border-radius: 10px;
+    display: inline-table;
+  }
+  .but{
+    background-color: LightGreen;
+    border-radius: 5px;
+  }
+  /*admin*/
+  .not{
+    display: inline;
+    margin-left: 1000px;
+    position: fixed;
+
+    
+    }
+    /*notification*/
+    .box::-webkit-scrollbar-track
+{
+-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+background-color: #F5F5F5;
+  border-radius: 5px
+}
+
+.box::-webkit-scrollbar
+{
+width: 10px;
+background-color: #F5F5F5;
+  border-radius: 5px
+}
+
+.box::-webkit-scrollbar-thumb
+{
+background-color: black;
+border: 2px solid black;
+  border-radius: 5px
+}
+
+header{
+  -moz-box-shadow: 10px 10px 23px 0px rgba(0,0,0,0.1);
+  box-shadow: 10px 10px 23px 0px rgba(0,0,0,0.1);
+  height: 110px;
+  vertical-align: middle;
+}
+
+h1{
+ float: left;
+  padding: 10px 30px
+}
+
+body{
+  margin: 0;
+  padding: 0;
+  font-family: 'Raleway', sans-serif;
+}
+
+.icons{
+  display: inline;
+  float: right;
+}
+
+.notification{
+  padding-top: 30px;
+  position: relative;
+  display: inline-block;
+}
+
+.number{
+  height: 22px;
+  width:  22px;
+  background-color: #d63031;
+  border-radius: 20px;
+  color: white;
+  text-align: center;
+  position: absolute;
+  top: 23px;
+  left: 60px;
+  padding: 3px;
+  border-style: solid;
+  border-width: 2px;
+}
+
+.number:empty {
+   display: none;
+}
+
+.notBtn{
+  transition: 0.5s;
+  cursor: pointer
+}
+
+.fas{
+  font-size: 25pt;
+  padding-bottom: 10px;
+  color: black;
+  margin-right: -55px;
+  margin-bottom: 40px;
+  
+  
+}
+
+.box{
+  width: 400px;
+  height: 0px;
+  border-radius: 10px;
+  transition: 0.5s;
+  position: absolute;
+  overflow-y: scroll;
+  padding: 0px;
+  left: -300px;
+  margin-top: 5px;
+  background-color: #F4F4F4;
+  -webkit-box-shadow: 10px 10px 23px 0px rgba(0,0,0,0.2);
+  -moz-box-shadow: 10px 10px 23px 0px rgba(0,0,0,0.1);
+  box-shadow: 10px 10px 23px 0px rgba(0,0,0,0.1);
+  cursor: context-menu;
+}
+
+.fas:hover {
+  color: #d63031;
+}
+
+.notBtn:hover > .box{
+  height: 60vh
+}
+
+.content{
+  padding: 20px;
+  color: black;
+  vertical-align: middle;
+  text-align: left;
+}
+
+.gry{
+  background-color: #F4F4F4;
+}
+
+.top{
+  color: black;
+  padding: 10px
+}
+
+.display{
+  position: relative;
+}
+
+.cont{
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #F4F4F4;
+}
+
+.cont:empty{
+  display: none;
+}
+
+.stick{
+  text-align: center;  
+  display: block;
+  font-size: 50pt;
+  padding-top: 70px;
+  padding-left: 80px
+}
+
+.stick:hover{
+  color: black;
+}
+
+.cent{
+  text-align: center;
+  display: block;
+}
+
+.sec{
+  padding: 25px 10px;
+  background-color: #F4F4F4;
+  transition: 0.5s;
+}
+
+.profCont{
+  padding-left: 15px;
+}
+
+.profile{
+  -webkit-clip-path: circle(50% at 50% 50%);
+  clip-path: circle(50% at 50% 50%);
+  width: 75px;
+  float: left;
+}
+
+.txt{
+  vertical-align: top;
+  font-size: 1.25rem;
+  padding: 5px 10px 0px 115px;
+}
+
+.sub{
+  font-size: 1rem;
+  color: grey;
+}
+
+.new{
+  border-style: none none solid none;
+  border-color: red;
+}
+
+.sec:hover{
+  background-color: #BFBFBF;
+}
+  </style>
+</head>
+
+<body>
+ 
+  <!-- <div style="width: 100px;float: left;"> -->
+    <div style="    float: left;
+  position: fixed;
+  top: 2px;">
+      <img src="./assets/logo.PNG" width="200px">
+      <div class="not">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAABKklEQVRIS9WV4W3CQAyFPyagI7QTQCconaSwQUdhA+gkLRu0E7QjwASgV9mRc0pyBikg7s/p7Nx79rN9mTDymoyMz80IlsAbsLAMv4At8GHnmr8RpszgAfgE5j3SfZt9yP8K7P1+SSCAGXAA3gFFrqVM1sDUzu6PhO6X7bmLQGlvDPwxRmEfK7tI2EQZ/H8WxMokbRVZl1+AxnlBh3mQO69flOhogE+AIrlkKfNfu/iPfVWC0SVy/VQ8yVQWsSaZmkDyaO8ssgC8TbW3+rmCHufnJ85R16BJKs1ClqQE18z0DpoC9X7PkAyCl10UVciQVMGHCGqZpMBrBH0ksvuDqIK2NC+bIfM/KOUShl7TKngmAw8oksiWAj+HIMrlz3dqEDMS1SZ40H//BCd7O1cZtSzGCwAAAABJRU5ErkJggg=="/>
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAABfUlEQVRIS7WV4TFEMRSFv60AFaACdEAFqAAdUAEdoAJUwFZAB+iAClAB8+0kO9lskrfZsZnJj/fefffce3LuyYgVr9GK87MIwBFwCOyGbU1vYT8B41aRLYB94A7YGujyAzgDXkpxNYAr4LKTvnPgNv+nBGDgdWfyGH4B3KT/5gDS8rxk8vjbQUpXDiCfmwWAH0Da7sO30/C8Vog1x3Z8nwKolsdK9XOtAy0qjwEVNiNTqzupAGwA39m3deCrEv8A2OUMgNre+ScAc+3lAL+Nw+2laJo7PYMWgPR4yLbukkqfpam2JrlTgBZFvcp9j7aSArQO+TNoWwm6tA9npiRpvxcPuSRT9e/7os8EEOWYz0NRpiLng6YSpK61dNnXJMBupwY5ZBXSpoLyGYj5PGQd1y7jalqFQfmEmlwD0/djN1btHWFsqqRBs4tVLOOopVlp3miqRIpqSonFyLm20HXhpIcqv25piVaizqVLBU1MrTltvVPUE7/Ipd+Tby72DxfISRlF0L/VAAAAAElFTkSuQmCC"/>
+        
+        <div class = "icons">
+<a href = "#"><i class="fas fa-archive"></i></a>
+<div class = "notification">
+ <a href = "#">
+ <div class = "notBtn" href = "#">
+   <!--Number supports double digets and automaticly hides itself when there is nothing between divs -->
+   <div class = "number">2</div>
+   <i class="fas fa-bell"></i>
+     <div class = "box">
+       <div class = "display">
+         <div class = "nothing">
+           <i class="fas fa-child stick"></i>
+           <div class = "cent">Unfortunately, ur application not selected!</div>
+         </div>
+         <div class = "cont"><!-- Fold this div and try deleting evrything inbetween -->
+            <div class = "sec new">
+              <a href = "https://codepen.io/Golez/">
+              <div class = "profCont">
+              <img class = "profile" src = "./assets/mecla.jpeg">
+               </div>
+              <div class = "txt">Congractulations, you are selected for free course acces</div>
+             <div class = "txt sub">11/7 - 2:30 pm</div>
+              </a>
+           </div>
+            <div class = "sec new">
+              <a href = "https://codepen.io/Golez/">
+              <div class = "profCont">
+              <img class = "profile" src = "./assets/tree.jpeg">
+               </div>
+              <div class = "txt">Purchase of your course is succesful</div>
+             <div class = "txt sub">11/7 - 2:13 pm</div>
+              </a>
+           </div>
+           
+         
+           
+            <div class = "sec">
+              <a href = "https://codepen.io/Golez/">
+              <div class = "profCont">
+              <img class = "profile" src = "./assets/chair.jpg">
+               </div>
+              <div class = "txt">Madison liked your post: "Pure css notification box"</div>
+             <div class = "txt sub">11/6 - 4:04 pm</div>
+              </a>
+           </div>
+           
+         
+           
+           
+        </div>
+       </div>
+    </div>
+ </div>
+   </a>
+</div>
+</div>
+       
+      </div>
+       
+    </div>
+
+
+    <div class="navg">
+      <span onclick="openNav()"><img
+          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAABPUlEQVRIS+2UMS4FURSGv9dRsQFhByQWIEodFR1WYAuWoKRCpXz0FBILUNOwAxJq8r3ckeOamXufZCpOcpM7OWf+75z/zp0RA8doYH3+BmAZ2AI2gVngJqyXksVdFkVR911xB1wnoPsfEQEK2aXd9ol2wZwmTvdgYQR8lMadMj/RjoBVYBvYARamFIvlF8AJcJsDYtFGggmcqYC9A8dJ+DHWl+6B4kJcQvNQzG4VF9J7yE3yCRgD58B9eEPbtE/YWxLWjib2gF1gvTRBPGwnPATOAMF5zAMHgOJLKfnNlTaLckDz7DSCroAonEN/Dag460lJEeCFmUtqduz4tfGapvuqb7NIwdNaxaxuP9nYCzC5AhwBa5UgO7exy94DaRHzy/D/5HK/GGqe02esqFa2RumiVQ7QXfYPKFo4uEWfOus3GYvZNAYAAAAASUVORK5CYII="
+          width="40px" style="padding-top: 40px; padding-left: 10px;"></span>
+      <span>
+        <div class="icon2">
+          <img
+            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAABfklEQVRIS7WU/TEDYRCHn1SACugAFaACVIAOqIAO6AAVoIJQATqgAypgnszuzeXNXe5NZm7/yVxub38f+zFh5JiMXJ8hgB3gGDgE9gCfjS/gA3gFXuK5k2sfwCZwC5xXKnwAroCfMr8LQKZTQBDjEXgOtlnAd6o6Ac4iz3dHoazBKQH8yOKG0lWwwKpgKZgKtNLc0yAzS2sDmPgePsu61p7EE0Q19mc/ibUBLsP3t5Bfaf9cmk0/iH7clQrypRL1fJ2wJ09AQ7Kt4C8qDo3uEPBcnXYxG7QBbFU0dhlIL8DoFt0A1zFizvM6sbTJjqnrvx1zfbEiQo7pd5yV2f6UDXWLZWEvnCTX37leFt4nz4oT9BsjLtGFRcv/3GaLC2LIrFRj0d0omgu5ULxLQYJol4uSd0alqruP31KRm++iVh279sc5cirQhjyA+pznWrW9Ng4tVQIkaC/TvibVAuivFtiPlaIG4DMuazMZqyAMAci4s3m1IEMAtXV680YH+AddAlQZyB3kPwAAAABJRU5ErkJggg=="
+            width="36px" style="padding-top: 5px; padding-left: 10px;" />
+
+        </div>
+        <div class="icon3">
+          <img
+            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAABPUlEQVRIS7WVgVECMRBFHxUAHUgFQAVIBWoHWAFSAVABdoB2YAdiB1ABlCAVwHwnYUJILonH7czN3CR3/+9m//60aDhaDeNTSrAFTsAwN7ESggmwNsCvwEcOSQnBBhgZUL2P70nwCHx7gCIQUWXkVvAFPHlIn4COrTbBA7CPoPSAQxWDW8Ez0AcEqEfRAQaJJKWsX/ONyPTsAFV9JVPJ757xl7xbgSvDukQXGftNrktyBN7cGQmp6L8kApec1ZNLxGRaShIE93vgn/s7MM1sRnToqgbNtYYUzwxQQjdRRVAi2x9z/tkEIe9JVdF1Bi7ZZEltFUBcmrV5YO/FTm+Oinxz0+hLWVaCsg/dB7IWG0Hzi/VA3tI2fyrrReR8tG6rkQfJ/K4iRmAzdbOO9cBWo/0bY8y9D1INju43TnAGF8k1GSc0xS0AAAAASUVORK5CYII="
+            width="36px" style="padding-top: 5px; padding-left: 10px;" />
+
+        </div>
+        <div class="icon4">
+          <img
+            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAABKElEQVRIS7WUjVHCQBSEPzqwA7UCtQIpgQ6kA7AS7UCtgBLEDqQCoAPtgPlmEjxDLvcDeTOZyUzydt/t7rsJI9dkZHxqCe6Bt2a4h6EhawimwAq4AvbAzSUJlsBLAPgMvF6K4B14CsB+m+l/ziVQik9A3cP6AOapkKQ8EFRwSbp1C+zOIXA69e4D/wI0O1mxE2jcYqD7G9ATiXyPVpfAac33LDna3w+avG6eE8IugdPcFYD3/SrGcfnGINiEievzwM3UwPa5LjiR0XUZj7uRiqnYLaGNMflcOr9r/L/KIbBB87eRyCqJke5NUy5BLLYnktScQImcPqyoJDUEZvwxaByUpJTAJHkXtZWUpJTAy8yYZktSSqA8JiiaktSO5KYohZN92VUDxRoPh2U1GeIiv/IAAAAASUVORK5CYII="
+            width="36px" style="padding-top: 5px; padding-left: 10px;" />
+
+        </div>
+      </span>
+
+    </div>
+
+    <div id="sidebar" class="hide-all sidebar">
+      <a href="javascript:void(0)" class="" id="homeSide" onclick="openHome()"><img
+          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAA3UlEQVRIS+2V0RECIQxE33VgC1aglmAlaiVqJdqJLWgFtmAHOuvADQJ3BJz70nxC2JdkNkPHxNFNrE8NYAZcXEFr4GEpzgrw4ksnegVMECvgDGyiinW2K3VhAeTEvW4RUgIcgH2hyiOgvGyMAbbAqTQCd69RqZskhgA14l40C8kB5BTZUc6pCdlWzpLD+ogBreJeMIGEAFV8b6g87lKQuV/EEKDWFjUzGcmV1kr3UwFuwHvrh1z0bOwk0fstQNxtboxfjegP+DBmvHS9r4MsS07Vn9y0GqUPp0k0fPQCZtsrGUSAA7wAAAAASUVORK5CYII=" />
+        Home
+      </a>
+      <a href="javascript:void(0)" id="newsSide" onclick="openNews()">
+        <img
+          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAvElEQVRIS82V0Q0CIRBE31VgCWonlqKVaSmWoh3YgYaLl0ACecsZcvK7y8zODGEnBp9pMD5GcAKuwKExyAO4APfWoEaQAPaiMvUc1xK8vxdbg1hdLTIAqxcE5nf0PRS55NIjfveQzLnkBCo3iF7gbE5gqmr1LgVDCIJWa9tsfy0DvRlsaBL0BP+fGdgHaA51vSIDq9W3I3gBuzUjV+48lyWV+51+01tgwdgMCfy8bLlfAzUyXTgKYA3DFXwAdAcvGZ9RwYQAAAAASUVORK5CYII=" />
+        Tutoring
+      </a>
+      <a href="javascript:void(0)" id="coursesSide" onclick="openCourses()">
+        <img
+          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAt0lEQVRIS+2V0Q3CMAxEXzZgBDZo2YBRGIEROgIjdJRuQNmAEdig1aEUUTWJidTwFf/0w/ad7ah3jsLhCuPzV4IRaBIbvYCbz1+BQ6JWWCflvzeYdj7XGztEEDtbC9z9EJpOU4ZiGTSbQGCr5kpg3reeqJ6o/mhRaTS1KNT5BHqg80l9L8AxocCbN7D8IEfNH4DU92dHU7E2WAxJANogJtmfYXIsUw42+M4zIIczI4fABAsVFCeYAYDYOBmXcLuRAAAAAElFTkSuQmCC" />
+        My courses
+      </a>
+      <a href="javascript:void(0)" id="coursesSide" onclick="openCourses()">
+        <img
+          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAABPUlEQVRIS+2UMS4FURSGv9dRsQFhByQWIEodFR1WYAuWoKRCpXz0FBILUNOwAxJq8r3ckeOamXufZCpOcpM7OWf+75z/zp0RA8doYH3+BmAZ2AI2gVngJqyXksVdFkVR911xB1wnoPsfEQEK2aXd9ol2wZwmTvdgYQR8lMadMj/RjoBVYBvYARamFIvlF8AJcJsDYtFGggmcqYC9A8dJ+DHWl+6B4kJcQvNQzG4VF9J7yE3yCRgD58B9eEPbtE/YWxLWjib2gF1gvTRBPGwnPATOAMF5zAMHgOJLKfnNlTaLckDz7DSCroAonEN/Dag460lJEeCFmUtqduz4tfGapvuqb7NIwdNaxaxuP9nYCzC5AhwBa5UgO7exy94DaRHzy/D/5HK/GGqe02esqFa2RumiVQ7QXfYPKFo4uEWfOus3GYvZNAYAAAAASUVORK5CYII=" />
+        My school
+      </a><a href="javascript:void(0)" id="coursesSide" onclick="openCourses()">
+        <img
+          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAxUlEQVRIS+2V0Q3CMAwFrxMAE8AGqBvAJmwGozACbEA3YAOQUYtCcGqTEAES+Uztd66fWzdUPk1lfTTACtgCixH4AVgDZ6tADXAC5lYi4IJogEsvnmrf8FzCTEgJ4AgsLUgJYAbsLUgJQHKnFsQDiD0JPYhnQTxpw8scgIhI71PnQdMDcEzsLUSdvq8AjPVcKh+KzH6D6oC/B08deOXDeovJv+eBbKmJt+woros3YWpl7pxbLdQX8U3/d73ff2TpZ3ZHT7sCPQQ9GTz+e7sAAAAASUVORK5CYII=" />
+        Tests
+      </a>
+      <hr>
+      <a href="javascript:void(0)" id="coursesSide" onclick="openCourses()">
+        <img
+          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAA9ElEQVRIS7WVURHCMBAFtwpAAg7AAeAAB2hAAUjAAgqQADgABSABCcybaWbacITmkmYmH+3H7t27NG0YeTUj86khmALbttAT8O4WXSoQ/AIsWugdWHclpYIrsIxi7klKBapckkkk2QFHvfMIFMsZEETVWhK3oJu5hqm8Y8kDWIU55HQQD1QJxBLFsvEM2YKH2LuSr89qSAcpeADe2liyBUPgvcxjQ6qDYnjqmFaB/xJUg/8S6FzPE7dsMvN/M5gBz1pwqwN9JLoGrJVVeQDEp+gA7A26C251YF2/brgleAHaEmnY2np2ryFXhRvu/R9kCUfv4AMDRD4ZROfDTgAAAABJRU5ErkJggg==" />
+        Notes
+      </a><a href="javascript:void(0)" id="coursesSide" onclick="openCourses()">
+        <img
+          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAA4klEQVRIS+2VWxHCMBBFTx3gAAlIAAmgBBwADkAJSAAHSEACDmAu02XSnYSETjPDR/erj+Se5Gaz21A5msr6xABLYA0sesAvwBE421wPkPiph7CfsjKIB9yAGbAHdgWgOzANxmvOFriaAx7wbEVLzyY2vvNtBIwWZRPVLIoNfCfQUFlUHZC8N0Pt4L8Bk7a6ymdVykdgeLa0fLPIhDeAnhUSPwSg3gBVxVBY1VExdyCruD+fgbkgYYmokSjUhPRuoFRf+biYssgL+zz3oOIdaKXhinNX2UDJ9lraWHKg5P/qgBeaA0EZL4D3EwAAAABJRU5ErkJggg==" />
+        Bookmarks
+      </a><a href="javascript:void(0)" id="coursesSide" onclick="openCourses()">
+        <img
+          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAABbUlEQVRIS7WVgTEEUQyG/+vAVYAKUAEqoANUgAroABWgAypABajg7iqgA+YzeTPZd3k3eWc2Mzu3t5vkz/v/JDvRyDYZOb96AT4k/UjayxbWA7Ah6csSp+NajgeSqPbbVXot6cr+X0q6de8A35H0Vp8sAiD5iyUnKUCndvn4B0lcW5Lw4/dQ0qt3igCohqSbWZ7NbyFptzp1U2Qqvu8EOLMTDcJWaQBNkcEzBWBQtG/3S/TwvAVA4EkDYFvS3N7B+8zuHwOdlgDgn8S+Q2qcqePZA+B3IemuJTLC0mreykC9u4d0CXxj6ETX1Uauv1hPURYgo/2ndVRIEQLeZLIEPvUAriXysyU+qgDgHg0Gtk6blhiWnreuNl01aE+W9bgCSA8arUrX0II9xmzQOX5BhhqUZcduYYkRSLXnAeecpiw7dldq2ZEnWtcIWLorWtcsusEmrecgQ0cR9t8fnBYYw4hRbcrSlaSyBU6jA/wCb/ZEGWO5EIEAAAAASUVORK5CYII=" />
+        Settings
+      </a>
+
+
+    </div>
+
+  <!-- </div> -->
+
+  <div class="home hide-all" style="
+  position: relative;left: 15%; width: 900px;" id="home">
+    <h1 style="font: bold;margin-left: 20px;">Hi, Champion!</h1>
+    <table class="maint">
+
+      <tr>
+        <div class="myless">
+          <th style="font-size: 20px;">Upcoming lessons</th>
+          <th style="font-size: 20px;">Leader board
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <select>
+              <option>English</option>
+              <option>Engl</option>
+              <option>E</option>
+            </select>
+          </th>
+          <th style=" font-size: 20px">Calender</th>
+      </tr>
+      <tr>
+        <td>
+          <div class="subless">
+            <table class="subt4">
+              <tr>
+                <td>June ,12<br>
+                  4.00pm</td>
+                <td>Tutoring Algebra<br>
+                  parry Lange</td>
+                <td><img src="assets/teacher.jpg" width="20" height="30"></td>
+              </tr>
+              <tr>
+            </table>
+            <table class="subt1">
+              <tr>
+                <td>June ,13<br>
+                  4.00pm</td>
+                <td>Tutoring Algebra<br>
+                  parry Lange</td>
+                <td><img src="assets/teacher.jpg" width="20" height="30"></td>
+              </tr>
+              <tr>
+            </table>
+            <table class="subt2">
+              <tr>
+                <td>June ,14<br>
+                  4.00pm</td>
+                <td>Tutoring Algebra<br>
+                  parry Lange</td>
+                <td><img src="assets/teacher.jpg" width="20" height="30"></td>
+              </tr>
+            </table>
+          </div>
+        </td>
+  </div>
+  <td>
+    <table class="leader">
+      <th>Rank</th>
+      <th>Name</th>
+      <th>Score</th>
+      <th>Best score</th>
+      </tr>
+      <tr style="text-align: center">
+        <td>1</td>
+        <td>lrry</td>
+        <td>2000</td>
+        <td>98</td>
+      </tr>
+      <tr style="text-align: center">
+        <td>2</td>
+        <td>marry</td>
+        <td>1900</td>
+        <td>87</td>
+      </tr>
+      <tr style="text-align: center">
+        <td>3</td>
+        <td>ellypse</td>
+        <td>1800</td>
+        <td>67</td>
+      </tr>
+      <tr style="text-align: center">
+        <td>4</td>
+        <td>rani</td>
+        <td>1500</td>
+        <td>89</td>
+      </tr>
+      <tr style="text-align: center">
+        <td>5</td>
+        <td>renu</td>
+        <td>1000</td>
+        <td>90</td>
+      </tr>
+    </table>
+  </td>
+  <td>
+
+
+    <center>
+      <script language="javascript" type="text/javascript">
+        var day_of_week = new Array('Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat');
+        var month_of_year = new Array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
+
+        //  DECLARE AND INITIALIZE VARIABLES
+        var Calendar = new Date();
+
+        var year = Calendar.getFullYear();     // Returns year
+        var month = Calendar.getMonth();    // Returns month (0-11)
+        var today = Calendar.getDate();    // Returns day (1-31)
+        var weekday = Calendar.getDay();    // Returns day (1-31)
+
+        var DAYS_OF_WEEK = 7;    // "constant" for number of days in a week
+        var DAYS_OF_MONTH = 31;    // "constant" for number of days in a month
+        var cal;    // Used for printing
+
+        Calendar.setDate(1);    // Start the calendar day at '1'
+        Calendar.setMonth(month);    // Start the calendar month at now
+
+
+        /* VARIABLES FOR FORMATTING
+        NOTE: You can format the 'BORDER', 'BGCOLOR', 'CELLPADDING', 'BORDERCOLOR'
+              tags to customize your caledanr's look. */
+
+        var TR_start = '<TR>';
+        var TR_end = '</TR>';
+        var highlight_start = '<TD WIDTH="20"><TABLE CELLSPACING=0 BORDER=1  HEIGHT=10  BGCOLOR=DEDEFF BORDERCOLOR=CCCCCC><TR><TD WIDTH=50><B><CENTER>';
+        var highlight_end = '</CENTER></TD></TR></TABLE></B>';
+        var TD_start = '<TD WIDTH="50" HEIGHT="30 "><CENTER>';
+        var TD_end = '</CENTER></TD>';
+
+        /* BEGIN CODE FOR CALENDAR
+        NOTE: You can format the 'BORDER', 'BGCOLOR', 'CELLPADDING', 'BORDERCOLOR'
+        tags to customize your calendar's look.*/
+
+        cal = '<TABLE BORDER=1 CELLSPACING=0 CELLPADDING=0 BORDERCOLOR=BBBBBB><TR><TD>';
+        cal += '<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=2>' + TR_start;
+        cal += '<TD COLSPAN="' + DAYS_OF_WEEK + '" BGCOLOR="#EFEFEF"><CENTER><B>';
+        cal += month_of_year[month] + '   ' + year + '</B>' + TD_end + TR_end;
+        cal += TR_start;
+
+        //   DO NOT EDIT BELOW THIS POINT  //
+
+        // LOOPS FOR EACH DAY OF WEEK
+        for (index = 0; index < DAYS_OF_WEEK; index++) {
+
+          // BOLD TODAY'S DAY OF WEEK
+          if (weekday == index)
+            cal += TD_start + '<B>' + day_of_week[index] + '</B>' + TD_end;
+
+          // PRINTS DAY
+          else
+            cal += TD_start + day_of_week[index] + TD_end;
+        }
+
+        cal += TD_end + TR_end;
+        cal += TR_start;
+
+        // FILL IN BLANK GAPS UNTIL TODAY'S DAY
+        for (index = 0; index < Calendar.getDay(); index++)
+          cal += TD_start + '  ' + TD_end;
+
+        // LOOPS FOR EACH DAY IN CALENDAR
+        for (index = 0; index < DAYS_OF_MONTH; index++) {
+          if (Calendar.getDate() > index) {
+            // RETURNS THE NEXT DAY TO PRINT
+            week_day = Calendar.getDay();
+
+            // START NEW ROW FOR FIRST DAY OF WEEK
+            if (week_day == 0)
+              cal += TR_start;
+
+            if (week_day != DAYS_OF_WEEK) {
+
+              // SET VARIABLE INSIDE LOOP FOR INCREMENTING PURPOSES
+              var day = Calendar.getDate();
+
+              // HIGHLIGHT TODAY'S DATE
+              if (today == Calendar.getDate())
+                cal += highlight_start + day + highlight_end + TD_end;
+
+              // PRINTS DAY
+              else
+                cal += TD_start + day + TD_end;
+            }
+
+            // END ROW FOR LAST DAY OF WEEK
+            if (week_day == DAYS_OF_WEEK)
+              cal += TR_end;
+          }
+
+          // INCREMENTS UNTIL END OF THE MONTH
+          Calendar.setDate(Calendar.getDate() + 1);
+
+        }// end for loop
+
+        cal += '</TD></TR></TABLE></TABLE>';
+
+        //  PRINT CALENDAR
+        document.write(cal);
+
+//  End -->
+      </script>
+    </center>
+    <br />
+    <div style="clear:both"></div>
+</body>
+
+</html><a target="_blank" href="https://www.htmlbestcodes.com/"
+  style="font-size: 15pt; text-decoration: none;font-family:Tahoma;"></a>
+
+</td>
+</tr>
+<tr>
+
+  <td>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
+    <body>
+      <canvas id="myChart" style="width:100%;max-width:400px"></canvas>
+
+      <script>
+        var xValues = [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000];
+
+        new Chart("myChart", {
+          type: "line",
+          data: {
+            labels: xValues,
+            datasets: [{
+              data: [860, 1140, 1060, 1060, 1070, 1110, 1330, 2210, 7830, 2478],
+              borderColor: "red",
+              fill: false
+            }, {
+              data: [1600, 1700, 1700, 1900, 2000, 2700, 4000, 5000, 6000, 7000],
+              borderColor: "green",
+              fill: false
+            }, {
+              data: [300, 700, 2000, 5000, 6000, 4000, 2000, 1000, 200, 100],
+              borderColor: "blue",
+              fill: false
+            }]
+          },
+          options: {
+            legend: { display: false }
+          }
+        });
+      </script>
+      <h2>Spent time</h2>
+      <h4 style="text-align: center; background-color: LightGreen;padding:30px;">Red -- Last Week <br> Green -- Before
+        week<br> Blue -- This Week</h4>
+
+  </td>
+  <td>
+    <h2>Your courses</h2><br>
+    <h4>2 courses</h4>
+    <div style="background-color: LightGrey;padding: 10px;border-radius: 5px;">
+      <p>HTML</p>
+      <progress id="file" value="12" max="100"> 32% </progress>
+    </div>
+    <div style="background-color: LightGrey;padding: 10px;border-radius: 5px;">
+      <p>CSS</p>
+      <progress id=" file" value="92" max="100"> 92% </progress>
+    </div>
+
+
+  </td>
+  <td>
+    <h2>Homework progress</h2>
+
+    <body>
+
+      <h3>Biology</h3>
+
+      <label for="file">progress:</label>
+      <progress id="file" value="32" max="100"> 12% </progress>
+
+    </body>
+
+    <body>
+
+      <h3>Telugu</h3>
+
+      <label for="file">progress:</label>
+      <progress id="file" value="32" max="100"> 32% </progress>
+
+    </body>
+
+    <body>
+
+      <h3>English</h3>
+
+      <label for="file">progress:</label>
+      <progress id="file" value="32" max="100"> 82% </progress>
+
+    </body>
+
+  </td>
+</tr>
+<tr>
+  <td>
+    <div id="piechart"></div>
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <script type="text/javascript">
+      // Load google charts
+      google.charts.load('current', { 'packages': ['corechart'] });
+      google.charts.setOnLoadCallback(drawChart);
+
+      // Draw the chart and set the chart values
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Maths', 'Hours per Day'],
+          ['physics', 8],
+          ['chemistry', 2],
+          ['English', 4],
+          ['Telugu', 2],
+          ['Social', 8]
+        ]);
+
+        // Optional; add a title and set the width and height of the chart
+        var options = { 'title': 'Skills', 'width': 550, 'height': 400 };
+
+        // Display the chart inside the <div> element with id="piechart"
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+        chart.draw(data, options);
+      }
+    </script>
+
+  </td>
+  <td>
+
+    &nbsp;&nbsp;&nbsp;<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+    <label for="vehicle1"> Consise history of jeen<br>
+      <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Due on 4.00PM, 09/june/2020</p>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button
+        style="background-color:LightGreen;border-radius:7px;">History</button>
+      <h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mrs.Shakeera</h3>
+    </label><br>
+    <hr>
+
+    <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
+    <label for="vehicle2"> I have a car</label><br>
+    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Due on 4.00PM, 09/june/2020</p>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button style="background-color:LightBlue;border-radius:7px;">Art</button>
+    <h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mr.Robert segio</h3></label>
+
+  </td>
+  <td>
+    <h2>Goals</h2>
+    <select>
+      <option>Weekly</option>
+      <option>Daily</option>
+      <option>Monthly</option>
+
+    </select>
+
+
+    <body>
+      <h4>Blue -- completed<br>
+        White -- uncompleted</h4>
+      <svg class="progress" width="70" height="100">
+        <circle class="progress-circle" cx="50" cy="50" stroke="blue" r="30" fill="transparent" stroke-width="5" />
+        <text class="loading" fill="blue" x="50" y="50" alignment-baseline="middle" text-anchor="middle"></text>
+      </svg>
+      <span class=" loading"></span>
+      <script>
+        const circle = document.querySelector(".progress-circle");
+        const loading = document.querySelector(".loading");
+
+        const fakeUploadPercentage = [80];
+        let i = 0;
+
+        const circumference = circle.getTotalLength();
+
+        const interval = setInterval(() => {
+          circle.style.strokeDashoffset =
+            circumference - (fakeUploadPercentage[i] / 100) * circumference;
+          loading.innerHTML = fakeUploadPercentage[i] + "%";
+          i++;
+          console.log(i);
+          if (i == fakeUploadPercentage.length) {
+            clearInterval(interval);
+            loading.innerHTML = "100%";
+          }
+        }, 1000);
+      </script>
+    </body>
+
+
+
+  </td>
+</tr>
+
+</table>
+</div>
+
+
+<div class="news hide-all" id="news">
+  <h2 style="left: 36%;position: relative;">Tutoring details</h2>
+</div>
+
+
+<div class="courses hide-all" id="courses">
+ <div style="text-align: center;">
+
+<div style="margin-top: 70px;">
+<div>
+
+<div class="python">
+  <img src="./assets/python.jpg" width="150" height="250" ">
+  <h3>Python programming</h3>
+  <h5>by Robert</h5>
+  <button class="but">Programming</button>
+</div>
+<div class="python">
+  <img src="./assets/bbms.jpg" width="150" height="250" ">
+  <h3>Database system</h3>
+  <h5>by klaseen</h5>
+  <button class="but">Database</button>
+</div>
+<div class="python">
+  <img src="./assets/cn.jpg" width="150" height="250" ">
+  <h3>Computer networking</h3>
+  <h5>by Jhon</h5>
+  <button class="but">Networking</button>
+</div></div>
+</div>
+
+</div>
+
+
+
+
+
+</body>
+<script>
+  function openHome() {
+    document.getElementById("home").style.display = "block";
+    document.getElementById("newsSide").classList.remove("active")
+    document.getElementById("news").style.display = "none";
+    document.getElementById("homeSide").classList.add("active")
+    document.getElementById("courses").style.display = "none";
+    document.getElementById("coursesSide").classList.remove("active")
+  }
+
+
+  function openNews() {
+    document.getElementById("news").style.display = "block";
+    document.getElementById("newsSide").classList.add("active")
+    document.getElementById("home").style.display = "none";
+    document.getElementById("homeSide").classList.remove("active")
+
+    document.getElementById("courses").style.display = "none";
+    document.getElementById("coursesSide").classList.remove("active")
+  }
+
+
+  function openCourses() {
+    document.getElementById("courses").style.display = "block";
+    document.getElementById("coursesSide").classList.add("active")
+
+
+    document.getElementById("home").style.display = "none";
+    document.getElementById("homeSide").classList.remove("active")
+    document.getElementById("news").style.display = "none";
+    document.getElementById("newsSide").classList.remove("active")
+  }
+
+
+  function openNav() {
+    //document.getElementById("sidebar").style.display = "block";
+
+    var x = document.getElementById("sidebar");
+    if (x.style.display === "block") {
+      x.style.display = "none";
+    } else {
+      x.style.display = "block";
+    }
+
+  }
+
+  /* Set the width of the side navigation to 0 */
+  function closeNav() {
+    document.getElementById("sidebar").style.display = "none";
+  }
+
+
+</script>
+
+</html>
